@@ -3,21 +3,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="Layouts::header"></head>
+
 <body>
-
 <nav th:replace="Layouts::navbar"></nav>
-
-
 <div class = "container">
+<h4 class = "mb-4">Current Projects</h4>
 
-    <h4>Current Employees</h4>
+<div>
+<table class = "table table-bordered table-striped">
+    <thead class = "thead-dark">
+        <tr>
+            <th>Project Name</th>
+            <th>Project Stage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="aProject : ${projects}">
+            <td th:text="${aProject.name}"></td>
+            <td th:text="${aProject.stage}"></td>
+        </tr>
+    </tbody>
+</table>
+</div>
 
+<h4 class = mb-4>Current Employees</h4>
+
+<div>
     <table class = "table table-bordered table-striped">
         <thead class = "thead-dark">
         <tr>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Email Address</th>
+            <th>Email</th>
         </tr>
         </thead>
         <tbody>
@@ -28,10 +45,8 @@
         </tr>
         </tbody>
     </table>
-
-    <a th:href="@{/employee/newEmp}" class = "btn btn-primary btn-sm mb-3">Create New Employee</a>
 </div>
-
+</div>
 </body>
 
 </html>

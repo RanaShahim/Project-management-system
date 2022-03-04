@@ -1,12 +1,16 @@
 package com.example.demo.com.jrp.pma.Controllers;
 
 import com.example.demo.com.jrp.pma.dao.ProjectRepo;
+import com.example.demo.com.jrp.pma.entities.Employee;
 import com.example.demo.com.jrp.pma.entities.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/projects")
@@ -28,5 +32,11 @@ public class ProjectController {
             //Use redirect to prevent duplicate submissions because user can click submit 2,3 times
             return "redirect:/projects/new";
         //This method handles saving data to the db
+    }
+    @GetMapping("/AllProjects")
+    public String displayAll(Model model){
+        List<Project> projects = projRepo.findAll();
+        model.addAttribute("projects", projects);
+        return "Projects/ProjectsHome";
     }
 }
